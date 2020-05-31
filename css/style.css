@@ -5,10 +5,12 @@ ul {
 body {
     font-family: Verdana, sans-serif;    
     overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 body::-webkit-scrollbar {
-  width: 1em;
+    width: 1em;
+    display: none;
 }
 
 .main {
@@ -21,6 +23,7 @@ body::-webkit-scrollbar {
     width: 100%;
     padding: 40px 20px;
     background: #f04e22;
+    float: left;
 }
 
 .topBar img {

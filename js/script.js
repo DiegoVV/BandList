@@ -6,13 +6,17 @@ request.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands', true
 
 request.onload = function() {
     let data = JSON.parse(this.response);
-
-    data.forEach(band => 
-        //console.log(band)
-        bandList.push(band)
-    ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
-    currentList = bandList;
-    display(currentList);
+    
+    if (request.status >= 200 && request.status < 400) {
+        data.forEach(band => 
+            //console.log(band)
+            bandList.push(band)
+        ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
+        currentList = bandList;
+        display(currentList);
+    } else {
+        console.log("Error");
+    }
 }
 
 request.send();
@@ -22,6 +26,7 @@ function display(list){
     document.getElementById("bandListing").innerHTML = "";
     list.forEach( item => {
         let band = document.createElement("a");
+        band.setAttribute("href", "javascript:bandPage(" + item.id + ")");
         let bandImage = document.createElement("IMG");
         bandImage.src = item.image;
         /*if(item.image){                       //Check if image loaded properly
@@ -52,6 +57,7 @@ function dropdownMenu() {
 }
 
 function bandPage(id){
+    console.log(id);
     let pageInfo = new XMLHttpRequest();
     // id should be hidden using MD5, which would require a search function among the bands
     pageInfo.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands/' + id, true);
