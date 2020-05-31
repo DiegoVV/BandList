@@ -1,32 +1,37 @@
-var bandList = [];
-var currentList = [];
-var request = new XMLHttpRequest();
+if (window.location.pathname == "/index.html") {
+    var bandList = [];
+    var currentList = [];
+    var request = new XMLHttpRequest();
 
-request.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands', true);
+    request.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands', true);
 
-request.onload = function() {
-    let data = JSON.parse(this.response);
-    
-    if (request.status >= 200 && request.status < 400) {
-        data.forEach(band => 
-            //console.log(band)
-            bandList.push(band)
-        ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
-        currentList = bandList;
-        display(currentList);
-    } else {
-        console.log("Error");
+    request.onload = function () {
+        let data = JSON.parse(this.response);
+
+        if (request.status >= 200 && request.status < 400) {
+            data.forEach(band =>
+                //console.log(band)
+                bandList.push(band)
+            ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
+            currentList = bandList;
+            display(currentList);
+        } else {
+            console.log("Error retrieving request");
+        }
     }
+
+    request.send();
+
 }
 
-request.send();
-
-function display(list){
+function display(list) {
     //console.log(bandList);
     document.getElementById("bandListing").innerHTML = "";
-    list.forEach( item => {
+    list.forEach(item => {
         let band = document.createElement("a");
-        band.setAttribute("href", "javascript:bandPage(" + item.id + ")");
+        band.setAttribute("href", "javascript:bandPage('" + item.id + "')");
+        //band.setAttribute("onclick","bandPage(" + item.id + ")");
+        //band.setAttribute("data-id", item.id);
         let bandImage = document.createElement("IMG");
         bandImage.src = item.image;
         /*if(item.image){                       //Check if image loaded properly
@@ -56,22 +61,15 @@ function dropdownMenu() {
     document.getElementById("myDropdown").setAttribute("style", "display: block;");
 }
 
-function bandPage(id){
-    console.log(id);
+function bandPage(band) {
+    document.location.href = "bandPage.html";
     let pageInfo = new XMLHttpRequest();
+
     // id should be hidden using MD5, which would require a search function among the bands
-    pageInfo.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands/' + id, true);
+    pageInfo.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands/' + band, true);
 
-    pageInfo.onload = function() {
+    pageInfo.onload = function () {
         let data = JSON.parse(this.response);
-        console.log(data);
-
-        /*data.forEach(band => 
-            //console.log(band)
-            searchResult.push(band)
-        ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
-
-        display(searchResult);*/
     }
 
     pageInfo.send();
@@ -109,37 +107,41 @@ function search() {
     for (i = 0; i < bandList.length; i++) {
         a = bandList[i].name;
         if (a.toUpperCase().indexOf(filter) > -1) {
-          searchResults.push(bandList[i]);
+            searchResults.push(bandList[i]);
         }
     }
-    if(searchResults.length > 0){
-        if(searchResults.length == bandList.length){
-            document.getElementById("resultsAmountText").innerHTML  = " ";            
-        } else{
-            document.getElementById("resultsAmountText").innerHTML  = '&nbsp;' + '&nbsp;' + searchResults.length + ' resultados';            
+    if (searchResults.length > 0) {
+        if (searchResults.length == bandList.length) {
+            document.getElementById("resultsAmountText").innerHTML = " ";
+        } else {
+            document.getElementById("resultsAmountText").innerHTML = '&nbsp;' + '&nbsp;' + searchResults.length + ' resultados';
         }
         currentList = searchResults;
         display(currentList);
     } else {
-        document.getElementById("resultsAmountText").innerHTML  = " ";
+        document.getElementById("resultsAmountText").innerHTML = " ";
         document.getElementById("bandListing").innerHTML = "";
         let noResults = document.createElement("P");
-        noResults.textContent = "Sem resultados...";        
+        noResults.textContent = "Sem resultados...";
         noResults.setAttribute("class", "noResultText");
         let noResultsImg = document.createElement("IMG");
-        noResultsImg.src = "img/no_results.png";        
+        noResultsImg.src = "img/no_results.png";
         noResultsImg.setAttribute("class", "noResult");
         noResults.appendChild(noResultsImg);
         document.getElementById("bandListing").appendChild(noResults);
     }
 }
 
-function order(type){
-    if(type > 0){ // alphabetical
+function order(type) {
+    if (type > 0) { // alphabetical
         display(currentList.sort(compareName));
     } else { // by popularity
-        display(currentList.sort(comparePlays));      
+        display(currentList.sort(comparePlays));
     }
+}
+
+function back() {
+    document.location.href = "index.html";
 }
 
 // Close the dropdown menu if the user clicks outside of it
