@@ -1,47 +1,55 @@
-if (window.location.pathname == "/index.html") {
-    var bandList = [];
-    var albumList = [];
-    var currentList = [];
-    var request = new XMLHttpRequest();
+var bandList = [];
+var albumList = [];
+var currentList = [];
+var request = new XMLHttpRequest();
 
-    request.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands', true);
+request.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/bands', true);
 
-    request.onload = function () {
-        let data = JSON.parse(this.response);
+request.onload = function () {
+    let data = JSON.parse(this.response);
 
-        if (request.status >= 200 && request.status < 400) {
-            data.forEach(band =>
-                //console.log(band)
-                bandList.push(band)
-            ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
-            currentList = bandList;
-            display(currentList);
-        } else {
-            console.log("Error retrieving request for bands");
-        }
+    if (request.status >= 200 && request.status < 400) {
+        data.forEach(band =>
+            //console.log(band)
+            bandList.push(band)
+        ); //name ; image ; genre ; biography ; numPlays ; albums [ ] ; biography ; id
+        currentList = bandList;
+        display(currentList);
+    } else {
+        console.log("Error retrieving request for bands");
     }
-
-    request.send();
-    
-    var request2 = new XMLHttpRequest();
-
-    request2.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/albums', true);
-
-    request2.onload = function () {
-        let data = JSON.parse(this.response);
-
-        if (request2.status >= 200 && request2.status < 400) {
-            data.forEach(album => {
-                albumList.push(album);
-            }); //band (id) ; id ; image ; name ; releasedDate
-        } else {
-            console.log("Error retrieving request for albums");
-        }
-    }
-
-    request2.send();
-
 }
+
+request.send();
+
+var request2 = new XMLHttpRequest();
+
+request2.open('GET', 'https://iws-recruiting-bands.herokuapp.com/api/albums', true);
+
+request2.onload = function () {
+    let data = JSON.parse(this.response);
+
+    if (request2.status >= 200 && request2.status < 400) {
+        data.forEach(album => {
+            albumList.push(album);
+        }); //band (id) ; id ; image ; name ; releasedDate
+    } else {
+        console.log("Error retrieving request for albums");
+    }
+}
+
+request2.send();
+
+var input = document.getElementById("searchInput");
+
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+      
+    event.preventDefault();
+    search();
+  }
+});
 
 function display(list) {
     document.getElementById("bandListing").innerHTML = "";
