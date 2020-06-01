@@ -259,12 +259,6 @@ a.button {
     grid-gap: 5px;
 }
 
-.lineBeforeAlbum {
-    position: relative;
-    top: 750px;
-    right: 115px;
-}
-
 .albumTitle {
     text-transform: uppercase;
     position: relative;

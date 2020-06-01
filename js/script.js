@@ -134,10 +134,10 @@ function bandPage(band) {
         let bandBiography = document.createElement("P");
         bandBiography.innerHTML = currentBand.biography;
         bandBiography.setAttribute("class", "biography");
-        let HR = document.createElement("HR");
-        HR.setAttribute("class", "lineBeforeAlbum");
+        //let HR = document.createElement("HR");
+        //HR.setAttribute("class", "lineBeforeAlbum");
         mainWindow.appendChild(bandBiography);
-        mainWindow.appendChild(HR);
+        //mainWindow.appendChild(HR);
         
         let albunsTitle = document.createElement("P");
         albunsTitle.innerHTML = "Albuns";
@@ -151,6 +151,7 @@ function bandPage(band) {
             let albumObject = albumList.find(x => x.id === album);
             let albumCover = document.createElement("IMG");
             albumCover.setAttribute("src", albumObject.image);
+            albumCover.setAttribute("onerror", "this.src='img/no_results.png'") // If image doesn't load, displays no_results.png as image
             albumSection.appendChild(albumCover);
         });
         mainWindow.appendChild(albumSection);
