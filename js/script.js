@@ -1,3 +1,6 @@
+var orderAlpha = 1;
+var orderPopul = 1;
+
 var bandList = [];
 var albumList = [];
 var currentList = [];
@@ -173,9 +176,9 @@ function compareName(a, b) {
     const bandB = b.name.toUpperCase();
     let comparison = 0;
     if (bandA > bandB) {
-        comparison = 1;
+        comparison = 1 * orderAlpha;
     } else if (bandA < bandB) {
-        comparison = -1;
+        comparison = -1 * orderAlpha;
     }
     return comparison;
 }
@@ -186,9 +189,9 @@ function comparePlays(a, b) {
     const bandB = b.numPlays;
     let comparison = 0;
     if (bandA > bandB) {
-        comparison = -1;
+        comparison = -1 * orderPopul;
     } else if (bandA < bandB) {
-        comparison = 1;
+        comparison = 1 * orderPopul;
     }
     return comparison;
 }
@@ -231,8 +234,12 @@ function order(type) {
     
     if (type > 0) { // alphabetical
         display(currentList.sort(compareName));
+        orderAlpha = orderAlpha * -1;
+        orderPopul = 1;
     } else { // by popularity
         display(currentList.sort(comparePlays));
+        orderPopul = orderPopul * -1;
+        orderAlpha = 1;
     }
 }
 
