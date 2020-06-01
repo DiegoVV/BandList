@@ -259,6 +259,11 @@ a.button {
     grid-gap: 5px;
 }
 
+.albuns img {
+    width: 300px;
+    height: 300px;
+}
+
 .albumTitle {
     text-transform: uppercase;
     position: relative;
