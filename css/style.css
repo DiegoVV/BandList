@@ -16,7 +16,7 @@ body::-webkit-scrollbar {
 .main {
     margin: 0;
     padding: 10px 0;
-    background-color: #fff;
+    background-color: transparent;
 }
 
 .topBar {
@@ -153,14 +153,12 @@ a.button {
 .list img{
     position: relative;
     top: 10px;
-    border-radius: 50%;
     width: 130px;
     margin: 10px 50px;
 }
 
 .list .noResult {
     width: 50%;
-    border-radius: 0%;
     
 }
 
@@ -168,7 +166,6 @@ a.button {
     display: block;
     margin: 500px auto;
     width: 50%;
-    border-radius: 0%;
     text-align: center;
     color: #aaa;
     font-size: 40px;
@@ -198,6 +195,96 @@ a.button {
     display: contents;
     font-size: 32px;
     color: #aaa !important;
+}
+
+.background {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;    
+    z-index: -1;
+}
+
+.bandTitle {    
+    position: relative;
+    top: 300px;
+    width: -webkit-fill-available;
+    font-size: 72px;
+    color: #fff;
+    float: left;
+    text-align: center;
+    display: inline-block;
+}
+
+.bandInfo {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 520px;
+    font-size: 32px;
+    background-color: #fff;
+    width: 100%;
+    float: left;
+    padding: 10px 50px;
+    color: #888;
+    text-transform: uppercase;
+    height: 200px;
+}
+
+.bandAvatar{
+    float: left;
+    width: 240px;
+    position: relative;
+    top: 190px;
+    left: 390px;
+}
+
+.biography {
+    font-size: 24px;
+    text-align: justify;
+    width: -webkit-fill-available;
+    margin: 0px 100px;
+    float: left;
+    position: relative;
+    top: 250px;
+}
+
+.albuns {
+    display: grid;
+    position: relative;
+    top: 300px;
+    left: 35px;
+    float: left;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+}
+
+.lineBeforeAlbum {
+    position: relative;
+    top: 750px;
+    right: 115px;
+}
+
+.albumTitle {
+    text-transform: uppercase;
+    position: relative;
+    float: left;
+    width: -webkit-fill-available;
+    text-align: center;
+    font-size: 48px;
+    top: 300px;
+}
+
+.semitransparent {
+    opacity: 85%;
+}
+
+.roundImage{    
+    border-radius: 50%;
+}
+
+.floatRight{
+    float: right;
 }
 
 .show {
