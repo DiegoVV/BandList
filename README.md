@@ -1,5 +1,6 @@
 # Band Lis
 Mobile web application for displaying bands
 
-![Isobar.fm Home](https://imgur.com/a/OJFXykT)
-![Isobar.fm Band Page](https://imgur.com/a/P76FaI7)
+![Isobar.fm Home](https://i.imgur.com/3vNA3JE.png)
+
+![Isobar.fm Band Page](https://i.imgur.com/YyFHmtXl.png)
