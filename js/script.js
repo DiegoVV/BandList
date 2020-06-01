@@ -120,6 +120,7 @@ function bandPage(band) {
         let bandBackground = document.createElement("IMG");
         bandBackground.setAttribute("src", currentBand.image);
         bandBackground.setAttribute("class", "background");
+        bandBackground.setAttribute("onerror", "this.src='img/no_results.png'") // If image doesn't load, displays no_results.png as image
         mainWindow.appendChild(bandBackground);
 
         let bandName = document.createElement("P");
@@ -134,6 +135,7 @@ function bandPage(band) {
         let bandAvatar = document.createElement("IMG");
         bandAvatar.setAttribute("src", currentBand.image);
         bandAvatar.setAttribute("class", "roundImage bandAvatar");
+        bandAvatar.setAttribute("onerror", "this.src='img/no_results.png'") // If image doesn't load, displays no_results.png as image
         let bandPlays = document.createElement("P");
         bandPlays.textContent = currentBand.numPlays + " plays";
         bandPlays.setAttribute("class", "floatRight");
@@ -244,7 +246,7 @@ function order(type) {
 }
 
 function back() {
-    
+    // It's a simple but crude solution, ideally you'd go back to whatever sorting or search page you had previously
     location.reload();
 }
 

@@ -203,6 +203,7 @@ a.button {
     left: 0px;
     top: 0px;    
     z-index: -1;
+    height: 950px;
 }
 
 .bandTitle {    
