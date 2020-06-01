@@ -5,18 +5,19 @@
     <meta charset="utf-8" />
     <meta name="viewport content=" width=device-width, initial-scale=1>
     <title>Isobar.fm</title> <!-- title of tab -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <!link rel="tab icon" type="image/png" href="img/iconcircle.png" /> <!-- icon on tab -->
 </head>
 
 <body>
-    <div class="topBar">
+    <div class="topBar" id="topBar">
         <input type="text" id="searchInput" name="searchBar" placeholder="Search...">
         <button type="submit" onclick="search()"><img class="icon" src="img/search.png"></button>
         <img src="img/logo.png" alt="Isobar.fm" class="right">
     </div>
-    <div class="main">
+    <div class="main" id="main">
         <div class="dropdown">
             <p class="resultsAmount" id="resultsAmountText"> </p>
             <button onclick="dropdownMenu()" class="dropdownBtn"><img src="img/order_by.png"></button>

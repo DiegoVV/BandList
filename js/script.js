@@ -25,27 +25,24 @@ if (window.location.pathname == "/index.html") {
 }
 
 function display(list) {
-    //console.log(bandList);
     document.getElementById("bandListing").innerHTML = "";
     list.forEach(item => {
         let band = document.createElement("a");
         band.setAttribute("href", "javascript:bandPage('" + item.id + "')");
-        //band.setAttribute("onclick","bandPage(" + item.id + ")");
-        //band.setAttribute("data-id", item.id);
+        
         let bandImage = document.createElement("IMG");
         bandImage.src = item.image;
-        /*if(item.image){                       //Check if image loaded properly
-            bandImage.src = item.image;
-        } else{
-            bandImage.src = "img/no_results.png";            
-        }*/
+        bandImage.setAttribute("onerror", "this.src='img/no_results.png'") // If image doesn't load, displays no_results.png as image
+        
         let bandName = document.createElement("P");
         bandName.textContent = item.name;
         bandName.setAttribute("class", "title");
         //let br = document.createElement("BR");
+        
         let bandPlays = document.createElement("P");
         bandPlays.textContent = item.numPlays + "  plays";
         bandPlays.setAttribute("class", "plays");
+        
         let line = document.createElement("HR");
         band.appendChild(bandImage);
         band.appendChild(bandName);
@@ -53,7 +50,6 @@ function display(list) {
         band.appendChild(bandPlays);
         band.appendChild(line);
         document.getElementById("bandListing").appendChild(band);
-        //console.log(bandImage);
     })
 }
 
@@ -62,7 +58,25 @@ function dropdownMenu() {
 }
 
 function bandPage(band) {
-    document.location.href = "bandPage.html";
+    // Clean Top Bar
+    let topBar = document.getElementById("topBar");
+    topBar.innerHTML = "";
+    let backButton = document.createElement("A");
+    backButton.setAttribute("href", "javascript:back()");
+    let arrowIcon = document.createElement("I");
+    arrowIcon.setAttribute("class", "fa fa-arrow-left");
+    backButton.appendChild(arrowIcon);
+    let bandBackground = document.createElement("IMG");
+    bandBackground.setAttribute("src", "img/logo.png");
+    bandBackground.setAttribute("alt", "Isobar.fm");
+    bandBackground.setAttribute("class", "center");
+    topBar.appendChild(backButton);
+    topBar.appendChild(bandBackground);
+    
+    // Clean Main Window
+    let mainWindow = document.getElementById("main");
+    mainWindow.innerHTML = "";
+    
     let pageInfo = new XMLHttpRequest();
 
     // id should be hidden using MD5, which would require a search function among the bands
@@ -76,6 +90,7 @@ function bandPage(band) {
 }
 
 function compareName(a, b) {
+    
     const bandA = a.name.toUpperCase();
     const bandB = b.name.toUpperCase();
     let comparison = 0;
@@ -88,6 +103,7 @@ function compareName(a, b) {
 }
 
 function comparePlays(a, b) {
+    
     const bandA = a.numPlays;
     const bandB = b.numPlays;
     let comparison = 0;
@@ -100,6 +116,7 @@ function comparePlays(a, b) {
 }
 
 function search() {
+    
     let searchInput = document.getElementById("searchInput");
     let searchResults = [];
     //console.log(searchInput.value);
@@ -133,6 +150,7 @@ function search() {
 }
 
 function order(type) {
+    
     if (type > 0) { // alphabetical
         display(currentList.sort(compareName));
     } else { // by popularity
@@ -141,7 +159,8 @@ function order(type) {
 }
 
 function back() {
-    document.location.href = "index.html";
+    
+    location.reload();
 }
 
 // Close the dropdown menu if the user clicks outside of it
